@@ -1,52 +1,35 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import appRootPath from 'app-root-path';
-import { exec } from 'child_process';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import fs from 'fs-extra';
-import { promisify } from 'util';
+import asyncExec from './asyncExec';
 
-const asyncExec = promisify(exec);
-
-const buildApi = async () => {
-  const buildPath = `${appRootPath}/api/dist`;
+const build = (type: 'api' | 'app', dist: 'dist' | 'build') => {
+  const buildPath = `${appRootPath}/${type}/${dist}`;
 
   if (fs.existsSync(buildPath)) {
-    console.log('Removing old API builds...');
+    console.log(`Removing old ${type.toUpperCase()} builds...`);
 
     fs.rmSync(buildPath, {
       recursive: true,
     });
 
-    console.log('Old API builds removed');
+    console.log(`Old ${type} builds removed`);
   }
 
-  asyncExec(`cd ${appRootPath}/app && npm run build`);
-};
-
-const buildApp = async () => {
-  const buildPath = `${appRootPath}/app/build`;
-
-  if (fs.existsSync(buildPath)) {
-    console.log('Removing old APP builds...');
-
-    fs.rmSync(buildPath, {
-      recursive: true,
-    });
-
-    console.log('Old APP builds removed');
-  }
-
-  asyncExec(`cd ${appRootPath}/api && npm run build`);
+  asyncExec(`npm run build`, {
+    cwd: `${appRootPath}/${type}`,
+  });
 };
 
 (async () => {
   try {
     console.log('Building CMS data...');
 
-    await Promise.all([buildApi(), buildApp()]);
+    await Promise.all([build('api', 'dist'), build('app', 'build')]);
 
     console.log('Building CMS completed!');
-  } catch (e) {
+  } catch {
     console.log('Error while building the CMS');
   }
 })();
