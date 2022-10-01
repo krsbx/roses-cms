@@ -19,4 +19,4 @@ Yes, you can modify the premade things that we already made for you. But, please
 
 # Contributing
 
-If you want to contribute to this projects, please refer to the [contributing.md](./CONTRIBUTING.md) and [code of conduct](/krsbx/roses-cms/wiki/Code-of-Conduct)
+If you want to contribute to this projects, please refer to the [contributing.md](./CONTRIBUTING.md) and [code of conduct](https://github.com/krsbx/roses-cms/wiki/Code-of-Conduct)
