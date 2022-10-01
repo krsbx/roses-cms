@@ -1,16 +1,11 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import appRootPath from 'app-root-path';
-import { exec } from 'child_process';
-import { promisify } from 'util';
+import asyncExec from './asyncExec';
 
-const asyncExec = promisify(exec);
+const generateCommand = (type: 'api' | 'app') => `cd ${appRootPath}/${type} && npm run start`;
 
 (async () => {
-  try {
-    await Promise.all([
-      asyncExec(`cd ${appRootPath}/api && npm run start`),
-      asyncExec(`cd ${appRootPath}/app && npm run start`),
-    ]);
-    // eslint-disable-next-line no-empty
-  } catch {}
+  console.log('Starting all server...');
+
+  Promise.all([asyncExec(generateCommand('api')), asyncExec(generateCommand('app'))]);
 })();

@@ -10,13 +10,14 @@
     "migrate": "prisma migrate dev",
     "migrate:create": "prisma migrate dev --name",
     "migrate:reset": "prisma migrate reset",
-    "postmigrate": "prisma-repo --model-structures",
+    "postmigrate": "cd .. && ts-node bin/migrate.ts",
     "seed": "prisma db seed"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/lodash": "^4.14.186",
     "nodemon": "^2.0.20",
     "prisma": "^4.4.0",
     "prisma-repo": "^0.3.0",
