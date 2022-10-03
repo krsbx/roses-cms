@@ -7,17 +7,16 @@
     "start": "node dist/index.js",
     "build": "tsc --project tsconfig.build.json",
     "dev": "nodemon src/index.ts",
-    "migrate": "cd .. && ts-node roses/bin/migrate.ts",
-    "migrate:reset": "cd .. && ts-node roses/bin/migrate.ts reset",
-    "postmigrate": "cd .. && ts-node roses/bin/postmigrate.ts",
+    "migrate": "prisma migrate",
+    "migrate:reset": "prisma migrate dev reset",
+    "postmigrate": "cd .. && ts-node roses/bin/prepostmigrate.ts",
     "seed": "prisma db seed"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@types/lodash": "^4.14.186",
-    "prisma-repo": "^0.3.0"
+    "@types/lodash": "^4.14.186"
   },
   "dependencies": {
     "@krsbx/prisma-fqp": "^0.2.8",

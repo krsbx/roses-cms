@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { API_PATH } from '../utils/constant';
+import { PATH } from '../utils/constant';
 import asyncExec from './asyncExec';
 
 const commands = ['reset', 'deploy', 'status', 'resolve'];
@@ -42,7 +42,7 @@ const migrate = async () => {
   try {
     if (withName) {
       asyncExec(`prisma migrate dev --name ${name}${restArgs}`, {
-        cwd: API_PATH,
+        cwd: PATH.API,
       });
 
       return;
@@ -50,14 +50,14 @@ const migrate = async () => {
 
     if (isCommand) {
       asyncExec(`prisma migrate ${name}${restArgs}`, {
-        cwd: API_PATH,
+        cwd: PATH.API,
       });
 
       return;
     }
 
     asyncExec(`prisma migrate dev${restArgs}`, {
-      cwd: API_PATH,
+      cwd: PATH.API,
     });
   } catch {
     console.log('Error while running the migrate functions');

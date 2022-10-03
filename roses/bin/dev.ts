@@ -3,7 +3,9 @@ import { PATH } from '../utils/constant';
 import asyncExec from './asyncExec';
 
 const dev = (type: 'api' | 'app') =>
-  asyncExec(`cd ${PATH[type.toUpperCase() as PathTypeKey]} && npm run dev`);
+  asyncExec(`npm run dev`, {
+    cwd: PATH[type.toUpperCase() as PathTypeKey],
+  });
 
 const processArgs = () => {
   let isWithArg = false;
