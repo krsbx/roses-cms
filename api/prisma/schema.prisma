@@ -12,8 +12,8 @@ datasource db {
 
 // Do Not Remove This Model
 // This Model is used for tracking which model has been created in api/app
-model RosesCMS {
-  id        Int      @id
+model RosesCms {
+  id        Int      @id @default(autoincrement())
   name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

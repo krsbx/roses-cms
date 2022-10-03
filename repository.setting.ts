@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { PrismaRepoConfig } from 'prisma-repo';
 
 const config: PrismaRepoConfig = {
@@ -6,7 +5,7 @@ const config: PrismaRepoConfig = {
     baseRepository: false,
     repository: false,
   },
-  repositoryPath: 'src/repository',
+  repositoryPath: 'api/src/repository',
   prismaLogger: true,
 };
 
