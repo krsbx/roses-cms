@@ -7,5 +7,5 @@ package-lock.json
 .eslintrc.json
 tsconfig.json
 
-src/repository/models.ts
-src/repository/baseRepository.ts
+api/src/repository/models.ts
+api/src/repository/baseRepository.ts
