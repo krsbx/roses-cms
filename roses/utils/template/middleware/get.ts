@@ -1,8 +1,16 @@
-import { pascalCase } from '../case';
+import { pascalCase } from '../../case';
 
 export const getTemplate = (modelName: string) =>
   `export const get${pascalCase(modelName)}Mw = asyncMw(async (req, res, next) => {
   req.${modelName} = await repository.${modelName}.findOne(req.params.id);
+
+  if (!req.${modelName}) {
+    return res.status(404).json({
+      code: 404,
+      status: httpStatus['404_NAME'],
+      message: '${pascalCase(modelName)} not found',
+    });
+  }
 
   return next();
 });`;

@@ -1,6 +1,6 @@
+import { execSync, ExecSyncOptionsWithBufferEncoding } from 'child_process';
 import _ from 'lodash';
 import { PATH } from '../utils/constant';
-import asyncExec from './asyncExec';
 
 const commands = ['reset', 'deploy', 'status', 'resolve'];
 
@@ -39,26 +39,25 @@ const migrate = async () => {
   const hasMore = rest.length > 0;
   const restArgs = hasMore ? ` ${_.compact(rest).join(' ')}` : '';
 
+  const options: ExecSyncOptionsWithBufferEncoding = {
+    cwd: PATH.API,
+    stdio: 'inherit',
+  };
+
   try {
     if (withName) {
-      asyncExec(`prisma migrate dev --name ${name}${restArgs}`, {
-        cwd: PATH.API,
-      });
+      execSync(`prisma migrate dev --name ${name}${restArgs}`, options);
 
       return;
     }
 
     if (isCommand) {
-      asyncExec(`prisma migrate ${name}${restArgs}`, {
-        cwd: PATH.API,
-      });
+      execSync(`prisma migrate ${name}${restArgs}`, options);
 
       return;
     }
 
-    asyncExec(`prisma migrate dev${restArgs}`, {
-      cwd: PATH.API,
-    });
+    execSync(`prisma migrate dev${restArgs}`, options);
   } catch {
     console.log('Error while running the migrate functions');
   }
